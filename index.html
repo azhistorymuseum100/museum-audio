@@ -3,6 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muzey Audio Bələdçi</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .player-card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        .title-area { margin-bottom: 20px; }
+        .museum-name { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .track-title { font-size: 20px; font-weight: bold; color: #1a1a1a; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        
+        /* Seçim siyahısı stili */
+        .selector-container { margin-bottom: 20px; text-align: left; }
+        label { font-size: 13px; color: #888; margin-left: 5px; }
+        select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; background: #fafafa; font-size: 16px; color: #333; cursor: pointer; outline: none; transition: border 0.3s; }
+        select:focus { border-color: #007bff; }
+
+        audio { width: 100%; margin-top: 10px; }
+        .footer { margin-top: 20px; font-size: 12px; color: #aaa; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="player-card">
+    <div class="title-area">
+        <div class="museum-name">Milli Azərbaycan Tarixi Muzeyi</div>
+        <div id="display-title" class="track-title">Hacı Zeynalabdin Tağıyevin İş Kabineti</div>
+    </div>
+
+    <div class="selector-container">
+        <label for="room-select">Otağı seçin:</label>
+        <select id="room-select" onchange="changeTrack()">
+            <option value="birinci_otaq.mp3">1. İş Kabineti</option>
+            <option value="serq_zali.mp3">2. Şərq Zalı</option>
+            <option value="otaq3.mp3">3. Elm və Təhsil Pavilyonu</option>
+            <option value="otaq4.mp3">4. Ədəbiyyat və İncəsənət</option>
+            <option value="otaq5.mp3">5. Memarlıq və Şəhərsalma</option>
+            <option value="otaq6.mp3">6. Binəqədi Faunası</option>
+            <option value="otaq7.mp3">7. Zorxana Tarixi</option>
+            <option value="otaq8.mp3">8. Kitabxana</option>
+            <option value="otaq9.mp3">9. Qonaq Otağı</option>
+        </select>
+    </div>
+
+    <audio id="main-player" controls>
+        <source id="audio-source" src="birinci_otaq.mp3" type="audio/mpeg">
+        Brauzeriniz bu audionu dəstəkləmir.
+    </audio>
+
+    <div class="footer">Eksponat haqqında məlumatı dinləmək üçün otağı seçin və "Play" düyməsini sıxın.</div>
+</div>
+
+<script>
+    function changeTrack() {
+        const select = document.getElementById('room-select');
+        const player = document.getElementById('main-player');
+        const source = document.getElementById('audio-source');
+        const titleDisplay = document.getElementById('display-title');
+
+        // Seçilmiş faylın adını və otağın adını götürürük
+        const selectedFile = select.value;
+        const selectedRoomName = select.options[select.selectedIndex].text;
+
+        // Mənbəni yeniləyirik
+        source.src = selectedFile;
+        titleDisplay.innerText = selectedRoomName.split('. ')[1]; // Rəqəmi başlıqdan silirik
+
+        // Pleyeri yenidən yükləyirik və avtomatik başladırıq (isteğe bağlı)
+        player.load();
+        player.play();
+    }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muzeyin Audio Bələdçisi</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
