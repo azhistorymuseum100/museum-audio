@@ -3,48 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muzey Audio Bələdçi</title>
+    <title>H.Z.Tağıyevin Xatirə Muzeyi</title>
+    
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .player-card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-        .title-area { margin-bottom: 20px; }
-        .museum-name { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .track-title { font-size: 20px; font-weight: bold; color: #1a1a1a; min-height: 50px; display: flex; align-items: center; justify-content: center; }
-        
-        /* Seçim siyahısı stili - İnsanyönümlü və rahat toxunuş üçün */
-        .selector-container { margin-bottom: 20px; text-align: left; }
-        label { font-size: 13px; color: #888; margin-left: 5px; font-weight: bold; }
-        select { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid #ddd; background: #fafafa; font-size: 16px; color: #333; cursor: pointer; outline: none; transition: border 0.3s; }
-        select:focus { border-color: #007bff; }
+        /* RƏNG STANDARTLAŞDIRMASI (Bütün brauzerlərdə eyni görünüş üçün) */
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #888888;
+            --border-color: #dddddd;
+            --accent-color: #007bff;
+        }
 
-        /* Pleyerin təmiz görünüşü */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        .player-card { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        .title-area { margin-bottom: 20px; }
+        .museum-name { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .track-title { font-size: 20px; font-weight: bold; color: var(--text-main); min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        
+        .selector-container { margin-bottom: 20px; text-align: left; }
+        label { font-size: 13px; color: var(--text-muted); margin-left: 5px; font-weight: bold; }
+        select { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--border-color); background: #fafafa; font-size: 16px; color: var(--text-main); cursor: pointer; outline: none; transition: border 0.3s; }
+        select:focus { border-color: var(--accent-color); }
+
         audio { width: 100%; margin-top: 10px; outline: none; }
-        .footer { margin-top: 20px; font-size: 12px; color: #aaa; border-top: 1px solid #eee; padding-top: 15px; }
+        .footer { margin-top: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="player-card">
     <div class="title-area">
-        <div class="museum-name">Milli Azərbaycan Tarixi Muzeyi</div>
+        <div class="museum-name">Hacı Zeynalabdin Tağıyevin Xatirə Muzeyi</div>
         <div id="display-title" class="track-title">İş Kabineti</div>
     </div>
 
     <div class="selector-container">
-        <label for="room-select">Eksponatı / Otağı seçin:</label>
+        <label for="room-select">Otağı seçin:</label>
         <select id="room-select" onchange="changeTrack()">
-            
             <option value="birinci_otaq.mp3">1. İş Kabineti</option>
             <option value="ikinci_otaq.mp3">2. Şərq Zalı</option>
-
-            <option value="otaq3_faylin_adi.mp3">3. Üçüncü otağın adı</option>
-            <option value="otaq4_faylin_adi.mp3">4. Dördüncü otağın adı</option>
-            <option value="otaq5_faylin_adi.mp3">5. Beşinci otağın adı</option>
-            <option value="otaq6_faylin_adi.mp3">6. Altıncı otağın adı</option>
-            <option value="otaq7_faylin_adi.mp3">7. Yeddinci otağın adı</option>
-            <option value="otaq8_faylin_adi.mp3">8. Səkkizinci otağın adı</option>
-            <option value="otaq9_faylin_adi.mp3">9. Doqquzuncu otağın adı</option>
-
+            <option value="otaq3_faylin_adi.mp3">3. Kitabxana</option>
+            <option value="otaq4_faylin_adi.mp3">4. Bilyard otağı</option>
+            <option value="otaq5_faylin_adi.mp3">5. Yemək otağı</option>
+            <option value="otaq6_faylin_adi.mp3">6. Kiçik qonaq otağı</option>
+            <option value="otaq7_faylin_adi.mp3">7. Yataq otağı</option>
         </select>
     </div>
 
@@ -57,30 +61,38 @@
 </div>
 
 <script>
-    function changeTrack() {
-        const select = document.getElementById('room-select');
-        const player = document.getElementById('main-player');
-        const source = document.getElementById('audio-source');
-        const titleDisplay = document.getElementById('display-title');
+    const select = document.getElementById('room-select');
+    const player = document.getElementById('main-player');
+    const source = document.getElementById('audio-source');
+    const titleDisplay = document.getElementById('display-title');
 
-        // Ziyarətçinin seçdiyi faylın adını (məs: ikinci_otaq.mp3) və görünən mətni (məs: 2. Şərq Zalı) götürürük
+    function changeTrack() {
         const selectedFile = select.value;
         const selectedRoomName = select.options[select.selectedIndex].text;
 
-        // Pleyerin içindəki səs mənbəyini yeniləyirik
         source.src = selectedFile;
         
-        // Başlıqdakı rəqəmi təmizləyib yalnız otağın adını yuxarıda böyük hərflərlə göstəririk
         if(selectedRoomName.includes('. ')) {
             titleDisplay.innerText = selectedRoomName.split('. ')[1];
         } else {
             titleDisplay.innerText = selectedRoomName;
         }
 
-        // Pleyeri yenidən yükləyirik və avtomatik başladıb ziyarətçiyə təqdim edirik
         player.load();
         player.play();
     }
+
+    // STATİSTİKA ÜÇÜN İZLƏMƏ FUNKSİYASI
+    player.onplay = function() {
+        const currentRoom = titleDisplay.innerText;
+        
+        if (typeof gtag === 'function') {
+            gtag('event', 'audio_play', {
+                'event_category': 'Audio Guide',
+                'event_label': currentRoom
+            });
+        }
+    };
 </script>
 
 </body>
