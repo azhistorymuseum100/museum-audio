@@ -2,9 +2,9 @@
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>H.Z.Tağıyevin Xatirə Muzeyi</title>
-    <!-- Google tag (gtag.js) -->
+        <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WF2527NXYS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,95 +14,192 @@
   gtag('config', 'G-WF2527NXYS');
 </script>
 
+    
     <style>
-        /* RƏNG STANDARTLAŞDIRMASI (Bütün brauzerlərdə eyni görünüş üçün) */
         :root {
             --bg-color: #f0f2f5;
             --card-bg: #ffffff;
             --text-main: #1a1a1a;
-            --text-muted: #888888;
+            --text-muted: #666666;
             --border-color: #dddddd;
-            --accent-color: #007bff;
+            --accent-color: #0056b3; /* Muzeyə uyğun daha tünd və rəsmi mavi */
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        .player-card { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-        .title-area { margin-bottom: 20px; }
-        .museum-name { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .track-title { font-size: 20px; font-weight: bold; color: var(--text-main); min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg-color); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            -webkit-font-smoothing: antialiased; 
+            position: relative;
+        }
+
+        /* Ekranların ümumi stili */
+        .screen { 
+            background: var(--card-bg); 
+            padding: 30px 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            width: 100%; 
+            max-width: 450px; 
+            text-align: center; 
+            display: none; /* Standart olaraq gizlidir */
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* Aktiv ekranı göstərmək üçün sinif */
+        .screen.active { 
+            display: flex; 
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Qarşılama ekranının xüsusi stilləri */
+        .welcome-icon { font-size: 50px; margin-bottom: 15px; }
+        .welcome-title { font-size: 22px; font-weight: bold; color: var(--text-main); margin-bottom: 10px; }
+        .welcome-desc { font-size: 15px; color: var(--text-muted); line-height: 1.5; margin-bottom: 25px; }
+        .btn-start { 
+            background: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 16px 20px; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background 0.3s;
+            width: 100%;
+        }
+        .btn-start:hover { background: #004494; }
+
+        /* Pleyer ekranının xüsusi stilləri */
+        .museum-name { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold; }
+        .track-title { font-size: 22px; font-weight: bold; color: var(--text-main); min-height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
         
-        .selector-container { margin-bottom: 20px; text-align: left; }
+        .selector-container { margin-bottom: 25px; text-align: left; }
         label { font-size: 13px; color: var(--text-muted); margin-left: 5px; font-weight: bold; }
-        select { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--border-color); background: #fafafa; font-size: 16px; color: var(--text-main); cursor: pointer; outline: none; transition: border 0.3s; }
+        select { width: 100%; padding: 14px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--border-color); background: #fafafa; font-size: 16px; color: var(--text-main); cursor: pointer; outline: none; }
         select:focus { border-color: var(--accent-color); }
 
-        audio { width: 100%; margin-top: 10px; outline: none; }
-        .footer { margin-top: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid #eee; padding-top: 15px; }
+        audio { width: 100%; margin-top: 5px; outline: none; }
+
+        /* Qlobal Altbilgi (Bütün hüquqlar, Beta, AI məlumatı) */
+        .global-footer { 
+            position: absolute; 
+            bottom: 15px; 
+            left: 0; 
+            right: 0; 
+            text-align: center; 
+            font-size: 11px; 
+            color: #888; 
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        .global-footer span { font-weight: bold; color: #555; }
     </style>
 </head>
 <body>
 
-<div class="player-card">
-    <div class="title-area">
-        <div class="museum-name">Hacı Zeynalabdin Tağıyevin Xatirə Muzeyi</div>
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-icon">🏛️</div>
+        <div class="welcome-title">Xoş Gəlmisiniz</div>
+        <div class="welcome-desc">Hacı Zeynalabdin Tağıyevin Xatirə Muzeyinin interaktiv audio bələdçisinə daxil olmaq üçün lütfən tam ekran rejiminə keçin.</div>
+        <button class="btn-start" onclick="startExperience()">Tam Ekranla Başla</button>
+    </div>
+
+    <div id="player-screen" class="screen">
+        <div class="museum-name">H.Z. Tağıyevin Xatirə Muzeyi</div>
         <div id="display-title" class="track-title">İş Kabineti</div>
+
+        <div class="selector-container">
+            <label for="room-select">Otağı seçin:</label>
+            <select id="room-select" onchange="changeTrack()">
+                <option value="birinci_otaq.mp3">1. İş Kabineti</option>
+                <option value="ikinci_otaq.mp3">2. Şərq Zalı</option>
+                <option value="otaq3_faylin_adi.mp3">3. Kitabxana</option>
+                <option value="otaq4_faylin_adi.mp3">4. Bilyard otağı</option>
+                <option value="otaq5_faylin_adi.mp3">5. Yemək otağı</option>
+                <option value="otaq6_faylin_adi.mp3">6. Kiçik qonaq otağı</option>
+                <option value="otaq7_faylin_adi.mp3">7. Yataq otağı</option>
+            </select>
+        </div>
+
+        <audio id="main-player" controls>
+            <source id="audio-source" src="birinci_otaq.mp3" type="audio/mpeg">
+            Brauzeriniz bu audionu dəstəkləmir.
+        </audio>
     </div>
 
-    <div class="selector-container">
-        <label for="room-select">Otağı seçin:</label>
-        <select id="room-select" onchange="changeTrack()">
-            <option value="birinci_otaq.mp3">1. İş Kabineti</option>
-            <option value="ikinci_otaq.mp3">2. Şərq Zalı</option>
-            <option value="uchuncu_otaq.mp3">3. Kitabxana</option>
-            <option value="otaq4_faylin_adi.mp3">4. Bilyard otağı</option>
-            <option value="otaq5_faylin_adi.mp3">5. Yemək otağı</option>
-            <option value="otaq6_faylin_adi.mp3">6. Kiçik qonaq otağı</option>
-            <option value="otaq7_faylin_adi.mp3">7. Yataq otağı</option>
-        </select>
+    <div class="global-footer">
+        © Bütün hüquqlar Milli Azərbaycan Tarixi Muzeyinə aiddir.<br>
+        <span>Audio bələdçi Beta versiyadadır.</span> Məzmun süni intellekt tərəfindən səsləndirilmişdir.
     </div>
 
-    <audio id="main-player" controls>
-        <source id="audio-source" src="birinci_otaq.mp3" type="audio/mpeg">
-        Brauzeriniz bu audionu dəstəkləmir.
-    </audio>
+    <script>
+        const select = document.getElementById('room-select');
+        const player = document.getElementById('main-player');
+        const source = document.getElementById('audio-source');
+        const titleDisplay = document.getElementById('display-title');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const playerScreen = document.getElementById('player-screen');
 
-    <div class="footer">Məlumatı dinləmək üçün otağı seçin və "Play" düyməsini sıxın.</div>
-</div>
+        // Qarşılama ekranından pleyerə keçid və Tam Ekranı aktivləşdirmə
+        function startExperience() {
+            let elem = document.documentElement;
+            
+            // Brauzerin tam ekran funksiyasını çağırırıq
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => console.log(err));
+            } else if (elem.webkitRequestFullscreen) { /* Safari (iOS) */
+                elem.webkitRequestFullscreen().catch(err => console.log(err));
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen().catch(err => console.log(err));
+            }
 
-<script>
-    const select = document.getElementById('room-select');
-    const player = document.getElementById('main-player');
-    const source = document.getElementById('audio-source');
-    const titleDisplay = document.getElementById('display-title');
-
-    function changeTrack() {
-        const selectedFile = select.value;
-        const selectedRoomName = select.options[select.selectedIndex].text;
-
-        source.src = selectedFile;
-        
-        if(selectedRoomName.includes('. ')) {
-            titleDisplay.innerText = selectedRoomName.split('. ')[1];
-        } else {
-            titleDisplay.innerText = selectedRoomName;
+            // Ekranları dəyişirik
+            welcomeScreen.classList.remove('active');
+            playerScreen.classList.add('active');
         }
 
-        player.load();
-        player.play();
-    }
+        // Pleyerdə trekləri dəyişmə funksiyası
+        function changeTrack() {
+            const selectedFile = select.value;
+            const selectedRoomName = select.options[select.selectedIndex].text;
 
-    // STATİSTİKA ÜÇÜN İZLƏMƏ FUNKSİYASI
-    player.onplay = function() {
-        const currentRoom = titleDisplay.innerText;
-        
-        if (typeof gtag === 'function') {
-            gtag('event', 'audio_play', {
-                'event_category': 'Audio Guide',
-                'event_label': currentRoom
-            });
+            source.src = selectedFile;
+            
+            if(selectedRoomName.includes('. ')) {
+                titleDisplay.innerText = selectedRoomName.split('. ')[1];
+            } else {
+                titleDisplay.innerText = selectedRoomName;
+            }
+
+            player.load();
+            player.play().catch(e => console.log("Avtomatik oxutma brauzer tərəfindən bloklandı"));
         }
-    };
-</script>
+
+        // STATİSTİKA ÜÇÜN İZLƏMƏ (GA4)
+        player.onplay = function() {
+            const currentRoom = titleDisplay.innerText;
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'event_category': 'Audio Guide',
+                    'event_label': currentRoom
+                });
+            }
+        };
+    </script>
 
 </body>
 </html>
