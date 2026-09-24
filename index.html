@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Xatirə Muzeyi">
+<title>H.Z. Tağıyev Memorial Museum / Xatirə Muzeyi</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WF2527NXYS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WF2527NXYS');
+</script>
+<style>
+:root{--wine:#5c1a2b;--wine2:#7a2a40;--gold:#b8964e;--cream:#f7f1e6;--card:#fffdf8;--ink:#2a1a1f;--muted:#7a6b6f;--line:#e6dcc8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Segoe UI',Tahoma,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
+h1,h2,.serif{font-family:Georgia,'Times New Roman',serif}
+.screen{display:none;width:100%;max-width:450px}
+.screen.active{display:block;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px;box-shadow:0 12px 30px rgba(92,26,43,.12);text-align:center}
+.orn{color:var(--gold);letter-spacing:8px;font-size:12px;margin:10px 0}
+.wt{font-size:23px;color:var(--wine);margin:0 0 6px}
+.wd{font-size:14px;color:var(--muted);line-height:1.5;margin:0 0 20px}
+.lang{display:block;width:100%;margin-bottom:12px;padding:15px;border:0;border-radius:12px;font-size:17px;font-weight:bold;color:#fff;background:var(--wine);cursor:pointer}
+.lang:active{opacity:.85}
+.lang.suggested{box-shadow:0 0 0 3px var(--gold)}
+.lang:disabled{background:#d9d2c3;color:#8b8478;cursor:not-allowed}
+.lang small{font-weight:normal;font-size:12px;margin-left:6px}
+#ios{display:none;background:#fff3cd;color:#856404;padding:11px;border-radius:10px;font-size:12.5px;text-align:left;margin-bottom:16px;line-height:1.5}
+.hdr{text-align:center;margin-bottom:14px}
+.hdr .m{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--wine);font-weight:bold}
+.bar{height:6px;background:var(--line);border-radius:6px;margin:10px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--wine));transition:width .5s}
+.prog{font-size:12px;color:var(--muted)}
+.now{background:var(--wine);color:#fff;border-radius:18px;padding:20px;margin-bottom:16px;text-align:center}
+.now h2{margin:0 0 4px;font-size:22px}
+.now .hint{font-size:14px;opacity:.85}
+.now audio{width:100%;margin-top:12px}
+.nextbtn{display:none;margin-top:12px;width:100%;padding:12px;border:0;border-radius:10px;background:var(--gold);color:#2a1a1f;font-weight:bold;font-size:15px;cursor:pointer}
+.extra{background:var(--card);color:var(--ink);border-radius:12px;padding:12px;margin-top:12px;text-align:left;font-size:14px;line-height:1.5}
+.extra b{color:var(--wine)}
+.extra button{display:block;width:100%;text-align:left;margin-top:6px;padding:9px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:14px;cursor:pointer}
+.extra button.ok{background:#dff3e3;border-color:#7cc38a}.extra button.no{background:#fbe0e0;border-color:#e59a9a}
+.grid{display:grid;gap:10px}
+.room{display:flex;align-items:center;gap:12px;width:100%;padding:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-size:16px;color:var(--ink);text-align:left;cursor:pointer}
+.room .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--cream);border:1px solid var(--gold);color:var(--wine);display:grid;place-items:center;font:bold 15px Georgia,serif}
+.room .t{flex:1}
+.room.visited .n{background:var(--gold);color:#fff}
+.room.visited .n::after{content:"✓"}
+.room.visited .n span{display:none}
+.room.current{border:2px solid var(--wine);background:#fbf3f3}
+.room.up{border-style:dashed;border-color:var(--wine)}
+.reset{margin-top:16px;background:none;border:0;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+.foot{margin-top:22px;text-align:center;font-size:11px;color:#8a7d80;line-height:1.6;max-width:450px}
+.foot span{font-weight:bold;color:#5a4a4e}
+#ov{display:none;position:fixed;inset:0;background:rgba(42,26,31,.75);align-items:center;justify-content:center;padding:20px;z-index:9}
+#ov.show{display:flex}
+#ov .panel{max-width:340px}
+#ov button{margin-top:14px;padding:12px 26px;border:0;border-radius:10px;background:var(--wine);color:#fff;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div id="welcome" class="screen active">
+  <div class="panel">
+    <div style="font-size:46px">🏛️</div>
+    <div class="orn">◆ ◆ ◆</div>
+    <h1 class="wt">Xoş Gəlmisiniz / Welcome</h1>
+    <p class="wd">Zəhmət olmasa dil seçin.<br>Please select a language.</p>
+    <div id="ios">📱 <b>iPhone:</b> 'Share' → <b>'Add to Home Screen'</b> (Ana ekrana əlavə et)</div>
+    <div id="langs"></div>
+  </div>
+</div>
+
+<div id="player" class="screen">
+  <div class="hdr">
+    <div class="m" id="u-museum"></div>
+    <div class="orn">◆ ◆ ◆</div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="prog" id="u-prog"></div>
+  </div>
+  <div class="now">
+    <h2 class="serif" id="now-title"></h2>
+    <div class="hint" id="now-hint"></div>
+    <audio id="au" controls style="display:none"></audio>
+    <div id="extras"></div>
+    <button class="nextbtn" id="nextbtn"></button>
+  </div>
+  <div class="grid" id="rooms"></div>
+  <div style="text-align:center"><button class="reset" id="u-reset"></button></div>
+</div>
+
+<div class="foot" id="u-foot"></div>
+
+<div id="ov"><div class="panel">
+  <div style="font-size:44px">🏆</div>
+  <h2 class="wt" id="ov-t"></h2><p class="wd" id="ov-x"></p>
+  <button onclick="document.getElementById('ov').classList.remove('show')" id="ov-c"></button>
+</div></div>
+
+<script>
+// ---- AYARLAR -------------------------------------------------------------
+// Dil aktivləşdirmək üçün: on:true edin, UI[dil] və ROOMS-a həmin dilin adlarını əlavə edin, audio fayllarını yükləyin (tr_otaq1.mp3 ...).
+const LANGS = {
+  az: { label: '🇦🇿 Azərbaycan', on: true },
+  en: { label: '🇬🇧 English',    on: true },
+  tr: { label: '🇹🇷 Türkçe',     on: false },
+  ru: { label: '🇷🇺 Русский',    on: false }
+};
+// Hazırdır, amma SÖNDÜRÜLÜB. Aktiv etmək üçün true yazın və EXTRAS-a məzmun əlavə edin.
+const FEATURES = { fact: false, task: false, quiz: false };
+
+const ROOMS = [
+  { id: 1, az: 'İş Kabineti',          en: 'Study' },
+  { id: 2, az: 'Şərq Zalı',            en: 'Oriental Hall' },
+  { id: 3, az: 'Kitabxana',            en: 'Library' },
+  { id: 4, az: 'Bilyard otağı',        en: 'Billiard room' },
+  { id: 5, az: 'Yemək otağı',          en: 'Dining room' },
+  { id: 6, az: 'Kiçik qonaq otağı',    en: 'Small sitting room' },
+  { id: 7, az: 'Yataq otağı',          en: 'Bedroom' }
+];
+
+// Otaq başına əlavə məzmun (muzey işçiləri doldurur). Nümunə forma:
+// 1: { az: { fact: 'Mətn...', task: 'Tavandakı naxışı tapın', quiz: { q: 'Sual?', options: ['A','B','C'], correct: 1 } },
+//      en: { fact: '...', task: '...', quiz: { q: '...', options: [...], correct: 0 } } }
+const EXTRAS = {};
+
+const UI = {
+  az: { museum: 'H.Z. Tağıyevin Xatirə Muzeyi', hint: 'Dinləmək üçün aşağıdan otaq seçin', soon: 'tezliklə',
+        prog: n => n + ' / ' + ROOMS.length + ' otaq dinlənildi', next: 'Növbəti otaq: ', reset: 'Səfəri sıfırla',
+        doneT: 'Təbrik edirik!', doneX: 'Siz malikanənin bütün ' + ROOMS.length + ' otağını gəzdiniz.', close: 'Bağla',
+        fact: 'Bilirdinizmi?', task: 'Tapın və baxın', quiz: 'Mini-viktorina', ok: 'Düzdür!',
+        foot: '© Bütün hüquqlar Milli Azərbaycan Tarixi Muzeyinə aiddir.<br><span>Audio bələdçi Beta versiyadadır.</span> Məzmun süni intellekt tərəfindən səsləndirilmişdir.' },
+  en: { museum: 'H.Z. Taghiyev Memorial Museum', hint: 'Choose a room below to start listening', soon: 'soon',
+        prog: n => n + ' / ' + ROOMS.length + ' rooms heard', next: 'Next room: ', reset: 'Reset tour',
+        doneT: 'Congratulations!', doneX: 'You have explored all ' + ROOMS.length + ' rooms of the mansion.', close: 'Close',
+        fact: 'Did you know?', task: 'Find and look', quiz: 'Mini quiz', ok: 'Correct!',
+        foot: '© All rights reserved to the National Museum of History of Azerbaijan.<br><span>Audio guide is in Beta.</span> Content is voiced by Artificial Intelligence.' }
+};
+
+// ---- KÖMƏKÇİLƏR ------------------------------------------------------------
+const $ = id => document.getElementById(id);
+const KEY = 'matm_taghiyev_visited';
+let lang = 'az', cur = null, visited = [];
+
+function detectLang() {
+  const c = (navigator.language || 'az').toLowerCase().slice(0, 2);
+  return c === 'az' ? 'az' : 'en';
+}
+function load() { try { visited = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { visited = []; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(visited)); } catch (e) {} }
+function ga(name, p) { if (typeof gtag === 'function') gtag('event', name, Object.assign({ museum: 'taghiyev' }, p)); }
+
+// ---- GİRİŞ EKRANI ---------------------------------------------------------
+window.onload = function () {
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const sa = window.navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+  if (ios && !sa) $('ios').style.display = 'block';
+  const box = $('langs'), sug = detectLang();
+  Object.keys(LANGS).forEach(k => {
+    const b = document.createElement('button');
+    b.className = 'lang' + (k === sug ? ' suggested' : '');
+    b.innerHTML = LANGS[k].label + (LANGS[k].on ? '' : '<small>(' + UI.az.soon + ' / ' + UI.en.soon + ')</small>');
+    b.disabled = !LANGS[k].on;
+    if (LANGS[k].on) b.onclick = () => startApp(k);
+    box.appendChild(b);
+  });
+};
+
+function startApp(l) {
+  lang = l; load();
+  document.documentElement.lang = l;
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const el = document.documentElement;
+  if (!ios) { const f = el.requestFullscreen || el.webkitRequestFullscreen; if (f) { try { const r = f.call(el); if (r && r.catch) r.catch(() => {}); } catch (e) {} } }
+  const u = UI[l];
+  $('u-museum').textContent = u.museum;
+  $('u-foot').innerHTML = u.foot;
+  $('u-reset').textContent = u.reset;
+  $('u-reset').onclick = () => { visited = []; save(); cur = null; $('au').pause(); renderAll(); };
+  $('ov-t').textContent = u.doneT; $('ov-x').textContent = u.doneX; $('ov-c').textContent = u.close;
+  $('welcome').classList.remove('active');
+  $('player').classList.add('active');
+  renderAll();
+  ga('language_selected', { event_category: 'Audio Guide', event_label: l === 'az' ? 'Azerbaijani' : 'English' });
+}
+
+// ---- RENDER ---------------------------------------------------------------
+function nextRoom() {
+  const start = cur ? cur : 0;
+  for (let i = 1; i <= ROOMS.length; i++) {
+    const r = ROOMS[(start - 1 + i + ROOMS.length) % ROOMS.length];
+    if (r.id !== cur && visited.indexOf(r.id) === -1) return r;
+  }
+  return null;
+}
+
+function renderAll() {
+  const u = UI[lang];
+  $('u-prog').textContent = u.prog(visited.length);
+  $('bar').style.width = (visited.length / ROOMS.length * 100) + '%';
+  const up = cur && visited.indexOf(cur) !== -1 ? nextRoom() : null;
+  const list = $('rooms'); list.innerHTML = '';
+  ROOMS.forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'room' + (visited.indexOf(r.id) !== -1 ? ' visited' : '') + (r.id === cur ? ' current' : '') + (up && up.id === r.id ? ' up' : '');
+    b.innerHTML = '<span class="n"><span>' + r.id + '</span></span><span class="t">' + r[lang] + '</span>';
+    b.onclick = () => openRoom(r.id);
+    list.appendChild(b);
+  });
+  renderNow();
+}
+
+function renderNow() {
+  const u = UI[lang], r = ROOMS.filter(x => x.id === cur)[0];
+  $('now-title').textContent = r ? r[lang] : u.museum;
+  $('now-hint').textContent = r ? '' : u.hint;
+  $('au').style.display = r ? 'block' : 'none';
+  const nb = $('nextbtn'), n = nextRoom();
+  if (r && visited.indexOf(cur) !== -1 && n) {
+    nb.style.display = 'block'; nb.textContent = u.next + n[lang] + ' →'; nb.onclick = () => openRoom(n.id);
+  } else nb.style.display = 'none';
+  renderExtras(r);
+}
+
+// 3-cü, 4-cü, 5-ci bölmə: yalnız FEATURES açıqdırsa VƏ məzmun varsa görünür
+function renderExtras(r) {
+  const box = $('extras'); box.innerHTML = '';
+  if (!r) return;
+  const x = ((EXTRAS[r.id] || {})[lang]) || {}, u = UI[lang];
+  if (FEATURES.fact && x.fact) box.insertAdjacentHTML('beforeend', '<div class="extra"><b>💡 ' + u.fact + '</b><br>' + x.fact + '</div>');
+  if (FEATURES.task && x.task) box.insertAdjacentHTML('beforeend', '<div class="extra"><b>🔍 ' + u.task + '</b><br>' + x.task + '</div>');
+  if (FEATURES.quiz && x.quiz) {
+    const d = document.createElement('div'); d.className = 'extra';
+    d.innerHTML = '<b>❓ ' + u.quiz + '</b><br>' + x.quiz.q;
+    x.quiz.options.forEach((o, i) => {
+      const b = document.createElement('button'); b.textContent = o;
+      b.onclick = () => { const ok = i === x.quiz.correct; b.className = ok ? 'ok' : 'no'; if (ok) b.textContent = '✓ ' + o + ' — ' + u.ok; ga('quiz_answer', { event_label: r[lang], correct: ok }); };
+      d.appendChild(b);
+    });
+    box.appendChild(d);
+  }
+}
+
+// ---- PLEYER ---------------------------------------------------------------
+function openRoom(id) {
+  cur = id;
+  const au = $('au');
+  au.src = lang + '_otaq' + id + '.mp3';
+  au.load();
+  au.play().catch(() => {});
+  renderAll();
+  $('player').scrollIntoView({ behavior: 'smooth' });
+}
+
+function markVisited() {
+  if (!cur || visited.indexOf(cur) !== -1) return;
+  visited.push(cur); save();
+  const r = ROOMS.filter(x => x.id === cur)[0];
+  ga('room_completed', { event_category: 'Audio Guide', event_label: r.en });
+  renderAll();
+  if (visited.length === ROOMS.length) { ga('tour_completed', { event_category: 'Audio Guide' }); $('ov').classList.add('show'); }
+}
+
+$('au').addEventListener('timeupdate', function () { if (this.duration && this.currentTime / this.duration >= 0.8) markVisited(); });
+$('au').addEventListener('ended', markVisited);
+$('au').addEventListener('play', function () {
+  const r = ROOMS.filter(x => x.id === cur)[0];
+  if (r) ga('audio_play', { event_category: 'Audio Guide', event_label: r.en });
+});
+</script>
+</body>
+</html>
